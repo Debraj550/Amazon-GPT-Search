@@ -1,16 +1,16 @@
-## HackOn with Amazon - Season 3 Project
+# HackOn with Amazon - Season 3 Project
 
-### Amazon-GPT-Search
+## Amazon-GPT-Search
 
--- Dataset `https://www.kaggle.com/datasets/lokeshparab/amazon-products-dataset?select=All+Books.csv`
+-- **Dataset Used:** `https://www.kaggle.com/datasets/lokeshparab/amazon-products-dataset?select=All+Books.csv`
 
-git clone the repo to your local directory -
+### 1. Git Clone the repo to your local directory -
 
 ```bash
   git clone https://github.com/Debraj550/Amazon-GPT-Search.git
 ```
 
-How to fire up the client server -
+### 2. Start client server 🚀-
 
 ```bash
     cd client/
