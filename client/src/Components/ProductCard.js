@@ -4,7 +4,7 @@ const ProductCard = (props) => {
   const { product } = props;
 
   return (
-    <div className="mb-6 mt-2 py-4 px-1 flex overflow-hidden h-40 items-center w-9/12 ">
+    <div className="mb-6 mt-2 py-4 px-1 flex overflow-hidden h-40 items-center w-10/12">
       <div className="image w-3/12 bg-gray-100 h-full flex items-center">
         <img src={product.image} alt={`${product.name}`}></img>
       </div>

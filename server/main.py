@@ -7,7 +7,7 @@ app = FastAPI()
 
 
 @app.get("/read-csv")
-def read_csv():
+async def read_csv():
     try:
         csv_file_path = "../server/dataset/archive/air conditioners.csv"
         df = pd.read_csv(csv_file_path)
