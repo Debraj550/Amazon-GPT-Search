@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard.js";
 
 const ProductListing = ({ allProduct }) => {
+  const [isFixed, setIsFixed] = useState(false);
+
+  /*useEffect(() => {
+    const handleScroll = () => {
+      const threshold = 150;
+      if (window.scrollY >= threshold && !isFixed) {
+        setIsFixed(true);
+      } else if (window.scrollY < threshold && isFixed) {
+        setIsFixed(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isFixed]);*/
   return (
     <div className="p-4">
       <div className="search-bar m-auto w-4/12 relative ">
         <div className="w-full">
           <input
-            className="p-2 border-2 w-full rounded-lg"
+            className={`p-2 border-2 border-black/60 w-full rounded-lg ${
+              isFixed ? "fixed w-4/12" : ""
+            } top-0`}
             placeholder="Search a product"
           ></input>
           <button>
