@@ -10,10 +10,18 @@
   git clone https://github.com/Debraj550/Amazon-GPT-Search.git
 ```
 
-### 2. Start client server 🚀-
+### 2. Setup and Start Client (default localhost port: 3000) 🚀-
 
 ```bash
     cd client/
     npm install
     npm start
+```
+
+### 2. Setup and Start server (default localhost port: 8000) 🚀-
+
+```bash
+    cd server/
+    pip install uvicorn fastapi
+    uvicorn main:app --reload
 ```
