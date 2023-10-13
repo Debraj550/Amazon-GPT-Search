@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 import pandas as pd
+import json
 
 app = FastAPI()
 
@@ -10,9 +11,9 @@ def read_csv():
     try:
         csv_file_path = "../server/dataset/archive/air conditioners.csv"
         df = pd.read_csv(csv_file_path)
-        print("---------", df)
-        data = df.to_dict(orient="records")
-        print("---------", data)
+        data = df.to_json(orient="records")
+        # data1 = json.loads(data)
+        # print(type(data1))
         return data
 
     except Exception as e:

@@ -10,9 +10,20 @@ const ProductCard = (props) => {
       </div>
       <div className="details w-9/12 ml-4 mr-2 px-2 h-full mt-6">
         <h1 className="font-semibold ">{product.name}</h1>
-        <div className="flex text-sm">
-          <p>{product.ratings ? product.ratings : 0}/5</p>
-          <p>{product.no_of_ratings}</p>
+        <div className="flex text-sm gap-4">
+          <p className="font-bold text-red-500">
+            {product.ratings ? product.ratings : 0}/5
+          </p>
+          <p className="text-blue-500 font-bold">{product.no_of_ratings}</p>
+        </div>
+        <div>
+          {product.discount_price ? (
+            <h1>{product.discount_price}</h1>
+          ) : product.actual_price ? (
+            <h1>{product.actual_price}</h1>
+          ) : (
+            <h1>Not Available</h1>
+          )}
         </div>
       </div>
     </div>
