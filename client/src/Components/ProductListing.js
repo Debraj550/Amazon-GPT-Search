@@ -1,48 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ProductCard from "./ProductCard.js";
+import SearchBar from "./SearchBar.js";
+import { useProductContext } from "../utils/ProductContext.js";
 
-const ProductListing = ({ allProduct }) => {
-  const [isFixed, setIsFixed] = useState(false);
+const ProductListing = () => {
+  const { allProduct } = useProductContext();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
   const currentProducts = allProduct.slice(startIndex, endIndex);
   const totalPages = Math.ceil(allProduct.length / itemsPerPage);
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-  /*useEffect(() => {
-    const handleScroll = () => {
-      const threshold = 150;
-      if (window.scrollY >= threshold && !isFixed) {
-        setIsFixed(true);
-      } else if (window.scrollY < threshold && isFixed) {
-        setIsFixed(false);
-      }
-    };
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isFixed]);*/
   return (
     <div className="p-4">
-      <div className="search-bar m-auto w-4/12 relative ">
-        <div className="w-full">
-          <input
-            className={`p-2 border-2 border-black/60 w-full rounded-lg ${
-              isFixed ? "fixed w-4/12" : ""
-            } top-0`}
-            placeholder="Search a product"
-          ></input>
-          <button>
-            <i className="fa-solid fa-magnifying-glass absolute right-0 top-0 bottom-0 text-gray-600 font-bold px-3 m-auto h-fit"></i>
-          </button>
-        </div>
-      </div>
+      <SearchBar />
       <div className="p-4 flex">
         <div className="w-2/12 border-r-2">Filters</div>
         <div className="products w-10/12 pl-4 pr-2">
