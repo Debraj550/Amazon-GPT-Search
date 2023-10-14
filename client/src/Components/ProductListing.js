@@ -4,14 +4,14 @@ import SearchBar from "./SearchBar.js";
 import { useProductContext } from "../utils/ProductContext.js";
 
 const ProductListing = () => {
-  const { allProduct } = useProductContext();
+  const { filteredProduct } = useProductContext();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  const currentProducts = allProduct.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(allProduct.length / itemsPerPage);
+  const currentProducts = filteredProduct.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(filteredProduct.length / itemsPerPage);
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
@@ -42,10 +42,10 @@ const ProductListing = () => {
             </button>
             <span className="font-bold">{currentPage}</span>
             <span className="">
-              {currentPage + 1 <= allProduct.length && currentPage + 1}
+              {currentPage + 1 <= filteredProduct.length && currentPage + 1}
             </span>
             ......
-            <span className="">{allProduct.length}</span>
+            <span className="">{filteredProduct.length}</span>
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               className="px-4 py-2 bg-blue-500 text-white font-bold rounded-lg"
