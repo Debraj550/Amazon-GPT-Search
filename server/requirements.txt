@@ -12,3 +12,9 @@ Output: {
  short_description: ,
  recommendation: ,(in 50-70 words)
 }
+
+no of rating should be an integer in between 0 to 4,
+discount_price should be an integer number only
+short_description should be a short description of the input string that can be searched youtube
+
+now if the input string is "show me Samsung tab under 30000rs with best ratings"
