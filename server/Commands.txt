@@ -1,0 +1,4 @@
+Bulk Import ->
+mongoimport --uri mongodb+srv://hackonadmin:<PASSWORD>@hackon-amazon-s3.usvwn6s.mongodb.net/ProductDatabase --collection AirConditioners --type csv --file /Users/debraj/Desktop/Projects/Amazon-GPT-Search/server/dataset/archive/AirConditioners.csv --headerline
+
+

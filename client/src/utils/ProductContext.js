@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const ProductContext = createContext();
 
@@ -12,12 +13,23 @@ export const ProductProvider = ({ children }) => {
 
   const fetchData = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/read-csv");
-      const data = await res.json();
-      setAllProduct(JSON.parse(data));
-      setFilteredProduct(JSON.parse(data));
-    } catch (err) {
-      console.log(err);
+      const response = await axios.get(
+        "http://127.0.0.1:8000/get-all-products/"
+      );
+      if (response.status === 200) {
+        const data = response.data;
+        console.log(response);
+        setAllProduct(data);
+        setFilteredProduct(data);
+      } else {
+        console.log(
+          "Failed to fetch data:",
+          response.status,
+          response.statusText
+        );
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
   useEffect(() => {

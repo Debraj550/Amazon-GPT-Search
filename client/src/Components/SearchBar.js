@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { useProductContext } from "../utils/ProductContext";
+import axios from "axios";
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
   const { filterProducts } = useProductContext();
 
-  const handleSearch = () => {
-    filterProducts(search);
+  const handleSearch = async () => {
+    try {
+      const response = await axios.post("", search);
+      const data = response.data;
+      filterProducts(data);
+    } catch (e) {
+      console.log(e);
+    }
   };
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
