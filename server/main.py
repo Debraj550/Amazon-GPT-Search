@@ -5,6 +5,10 @@ import json
 
 app = FastAPI()
 
+# post function takes a query then process and send it to gpt
+# gpt resoponse then map to database values
+# fetch and give resp
+
 
 @app.get("/read-csv")
 async def read_csv():
