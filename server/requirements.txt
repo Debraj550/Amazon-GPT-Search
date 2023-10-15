@@ -2,3 +2,13 @@ uvicorn
 fastapi
 pymongo
 dotenv
+
+Input: string
+Output: {
+ filters: { name: , 
+            no_of_ratings: , 
+            discount_price: },
+ intent: ,
+ short_description: ,
+ recommendation: ,(in 50-70 words)
+}
