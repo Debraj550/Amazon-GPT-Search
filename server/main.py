@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 import uvicorn
-import pandas as pd
 import json
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
@@ -24,6 +23,19 @@ except Exception as e:
 # gpt resoponse then map to database values
 # fetch and give resp .///// hackonadmin, hackonadmin
 
+@app.get("/search-product/{query}")
+async def search_product(query: str):
+    try:
+        productDatabase = client["ProductDatabase"]
+        airConditionersCollections = productDatabase["AirConditioners"]
+        cursor = airConditionersCollections.find(
+            {"name": {"$regex": query, "$options": "i"}})
+        product_data = [dict(product, _id=str(product["_id"]))
+                        for product in cursor]
+        return JSONResponse(content=product_data)
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)})
+
 
 @app.get("/get-all-products")
 async def read_csv():
@@ -36,7 +48,7 @@ async def read_csv():
         return JSONResponse(content=product_data)
 
     except Exception as e:
-        return {"error": str(e)}
+        return {"error check": str(e)}
 
 
 if __name__ == "__main__":

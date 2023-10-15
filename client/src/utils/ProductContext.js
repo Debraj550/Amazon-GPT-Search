@@ -16,9 +16,9 @@ export const ProductProvider = ({ children }) => {
       const response = await axios.get(
         "http://127.0.0.1:8000/get-all-products/"
       );
+      console.log(response);
       if (response.status === 200) {
         const data = response.data;
-        console.log(response);
         setAllProduct(data);
         setFilteredProduct(data);
       } else {

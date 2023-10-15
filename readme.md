@@ -2,7 +2,7 @@
 
 ## Amazon-GPT-Search
 
--- **Dataset Used:** `https://www.kaggle.com/datasets/lokeshparab/amazon-products-dataset?select=All+Books.csv` (Air Conditioners.csv file)
+-- **Dataset Used:** `https://www.kaggle.com/datasets/lokeshparab/amazon-products-dataset?select=All+Books.csv` (Air Conditioners.csv file) 
 
 ### 1. Git Clone the repo to your local directory -
 
