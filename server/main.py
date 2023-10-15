@@ -6,9 +6,19 @@ from pymongo.server_api import ServerApi
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 app = FastAPI()
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 uri = os.getenv("DB_URI")
 client = MongoClient(uri, server_api=ServerApi('1'))
