@@ -15,7 +15,6 @@ async def read_csv():
         # data1 = json.loads(data)
         # print(type(data1))
         return data
-
     except Exception as e:
         return {"error": str(e)}
 
