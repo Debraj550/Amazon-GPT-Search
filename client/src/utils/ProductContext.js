@@ -16,7 +16,7 @@ export const ProductProvider = ({ children }) => {
       const response = await axios.get(
         "http://127.0.0.1:8000/get-all-products/"
       );
-      console.log(response);
+
       if (response.status === 200) {
         const data = response.data;
         setAllProduct(data);
@@ -45,20 +45,14 @@ export const ProductProvider = ({ children }) => {
     setFilteredProduct(filteredData);
   };
 
-  const filterProducts = (searchValue) => {
-    if (!searchValue) {
-      updateFilteredProduct(allProduct);
-    } else {
-      const filteredData = allProduct.filter((product) => {
-        return product.name.toLowerCase().includes(searchValue.toLowerCase());
-      });
-      updateFilteredProduct(filteredData);
-    }
-  };
-
   return (
     <ProductContext.Provider
-      value={{ allProduct, updateAllProduct, filteredProduct, filterProducts }}
+      value={{
+        allProduct,
+        updateAllProduct,
+        filteredProduct,
+        updateFilteredProduct,
+      }}
     >
       {children}
     </ProductContext.Provider>

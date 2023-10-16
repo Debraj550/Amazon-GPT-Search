@@ -21,7 +21,7 @@ const ProductListing = () => {
       <SearchBar />
       <div className="p-4 flex">
         <div className="w-2/12 border-r-2">Filters</div>
-        <div className="products w-10/12 pl-4 pr-2">
+        <div className="products w-8/12 pl-4 pr-2">
           <div>
             {currentProducts.length > 0 ? (
               currentProducts.map((product, idx) => (
