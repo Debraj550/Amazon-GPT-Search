@@ -9,6 +9,7 @@ import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
 from utils.dbconnection import connect_to_mongodb, disconnect_from_mongodb
+from api.product_api import search_product, read_csv
 
 load_dotenv()
 app = FastAPI()
@@ -60,31 +61,13 @@ async def response(query: str):
 
 
 @app.get("/search-product/{query}")
-async def search_product(query: str):
-    try:
-        productDatabase = client["ProductDatabase"]
-        airConditionersCollections = productDatabase["AirConditioners"]
-        cursor = airConditionersCollections.find(
-            {"name": {"$regex": query, "$options": "i"}})
-        product_data = [dict(product, _id=str(product["_id"]))
-                        for product in cursor]
-        return JSONResponse(content=product_data)
-    except Exception as e:
-        return JSONResponse(content={"error": str(e)})
+async def search_product_endpoint(query: str):
+    return search_product(client, query)
 
 
 @app.get("/get-all-products")
-async def read_csv():
-    try:
-        productDatabase = client["ProductDatabase"]
-        airConditionersCollections = productDatabase["AirConditioners"]
-        cursor = airConditionersCollections.find()
-        product_data = [dict(product, _id=str(product["_id"]))
-                        for product in cursor]
-        return JSONResponse(content=product_data)
-
-    except Exception as e:
-        return {"error check": str(e)}
+async def read_csv_endpoint():
+    return read_csv(client)
 
 
 if __name__ == "__main__":
