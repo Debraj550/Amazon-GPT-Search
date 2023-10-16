@@ -1,15 +1,19 @@
 from fastapi import FastAPI
 import uvicorn
 import json
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 import os
 from fastapi.middleware.cors import CORSMiddleware
+import google_auth_oauthlib.flow
+import googleapiclient.discovery
+import googleapiclient.errors
+from utils.dbconnection import connect_to_mongodb, disconnect_from_mongodb
 
 load_dotenv()
 app = FastAPI()
+client = connect_to_mongodb()
+# Enable cors
 origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
@@ -20,18 +24,40 @@ app.add_middleware(
 )
 
 
-uri = os.getenv("DB_URI")
-client = MongoClient(uri, server_api=ServerApi('1'))
-try:
-    client.admin.command('ping')
-    print("--------------------\n Pinged your deployment. You successfully connected to MongoDB!")
-except Exception as e:
-    print(e)
+youtube_api_key = os.getenv("YOUTUBE_API_KEY")
 
 
-# post function takes a query then process and send it to gpt
-# gpt resoponse then map to database values
-# fetch and give resp .///// hackonadmin, hackonadmin
+@app.get("/videos/{query}")
+async def response(query: str):
+    youtube = googleapiclient.discovery.build(
+        "youtube", "v3", developerKey=youtube_api_key)
+    request = youtube.search().list(
+
+        part="snippet",
+        maxResults=5,
+        # order="rating",
+        q=query,
+        regionCode="IN",
+        # type="video"
+    )
+
+    response = request.execute()
+    # return response
+    video_data = []
+    for item in response.get("items", []):
+        video_id = item["id"]["videoId"]
+        title = item["snippet"]["title"]
+        thumbnail_url = item["snippet"]["thumbnails"]["default"]["url"]
+        video_url = f"https://www.youtube.com/watch?v={video_id}"
+        video_data.append({
+            "title": title,
+            "video_url": video_url,
+            "thumbnail_url": thumbnail_url,
+            "video_id": video_id
+        })
+
+    return video_data
+
 
 @app.get("/search-product/{query}")
 async def search_product(query: str):
@@ -63,3 +89,4 @@ async def read_csv():
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
+    disconnect_from_mongodb(client)

@@ -2,6 +2,8 @@ uvicorn
 fastapi
 pymongo
 dotenv
+google-api-python-client
+
 
 Input: string
 Output: {
