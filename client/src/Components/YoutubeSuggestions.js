@@ -1,17 +1,23 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const YoutubeSuggestions = ({ youtubeSuggestions }) => {
   console.log(youtubeSuggestions);
   return (
-    <div className="p-2 bg-red-500 text-white border-2">
+    <div className="p-2 bg-neutral-200  border-2">
       {youtubeSuggestions.map((suggestion) => (
-        <div key={suggestion.video_id} className="flex gap-2">
+        <div
+          key={suggestion.video_id}
+          className="p-2 flex flex-col justify-center items-center"
+        >
           <div>
-            <img src={suggestion.thumbnail_url} alt={suggestion.title} />
+            <img
+              className="w-full"
+              src={suggestion.thumbnail_url}
+              alt={suggestion.title}
+            />
           </div>
-          <div>
-            <h1>{suggestion.title}</h1>
+          <div className="overflow-hidden">
+            <h1 className="w-full">{suggestion.title}</h1>
           </div>
         </div>
       ))}

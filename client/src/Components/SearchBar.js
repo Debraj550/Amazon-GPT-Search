@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useProductContext } from "../utils/ProductContext";
 import axios from "axios";
 import YoutubeSuggestions from "./YoutubeSuggestions.js";
-import { useAsyncError } from "react-router-dom";
 
 const SearchBar = () => {
   const [search, setSearch] = useState("");
@@ -21,10 +20,12 @@ const SearchBar = () => {
       );
       const data = response.data;
       updateFilteredProduct(data);
+
       const ytresponse = await axios.get(
         `http://127.0.0.1:8000/videos/${search}`
       );
       const ytdata = ytresponse.data;
+      console.log(ytdata);
       setYoutubeSuggestions(ytdata);
     } catch (e) {
       console.log(e);
@@ -58,14 +59,17 @@ const SearchBar = () => {
           className="mx-2 px-4 right-0 bg-red-500 text-white font-bold rounded-xl"
           onClick={handleShow}
         >
-          This
+          Explore Reviews
         </button>
-        {show && (
+      </div>
+      {show &&
+        (youtubeSuggestions.length > 0 ? (
           <div className="">
             <YoutubeSuggestions youtubeSuggestions={youtubeSuggestions} />
           </div>
-        )}
-      </div>
+        ) : (
+          <div>No Recommendations</div>
+        ))}
     </div>
   );
 };
