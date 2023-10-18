@@ -7,14 +7,16 @@ const YoutubeSuggestions = ({ youtubeSuggestions }) => {
       {youtubeSuggestions.map((suggestion) => (
         <div
           key={suggestion.video_id}
-          className="p-2 flex flex-col justify-center items-center"
+          className="p-2 flex flex-col justify-center items-center gap-2"
         >
           <div>
-            <img
-              className="w-full"
-              src={suggestion.thumbnail_url}
-              alt={suggestion.title}
-            />
+            <a href={suggestion.video_url} target="_blank" rel="noreferrer">
+              <img
+                className="w-full transition-all hover:scale-105"
+                src={suggestion.thumbnail_url}
+                alt={suggestion.title}
+              />
+            </a>
           </div>
           <div className="overflow-hidden">
             <h1 className="w-full">{suggestion.title}</h1>

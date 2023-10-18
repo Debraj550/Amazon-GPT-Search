@@ -104,8 +104,7 @@ const ProductListing = () => {
             </button>
           </div>
         </div>
-        <div className="suggestions w-2/12">
-          <h1>GPT Recommendations</h1>
+        <div className="suggestions w-2/12 border-l-2 pl-4 flex flex-col  items-center gap-2">
           <div className="px-4 ">
             <button
               className="mx-2 px-4  bg-red-500 text-white font-bold rounded-xl"
@@ -120,7 +119,9 @@ const ProductListing = () => {
                 <YoutubeSuggestions youtubeSuggestions={youtubeSuggestions} />
               </div>
             ) : (
-              <div>No Recommendations</div>
+              <div className="bg-neutral-200 text-center p-2">
+                No Recommendations
+              </div>
             ))}
         </div>
       </div>
