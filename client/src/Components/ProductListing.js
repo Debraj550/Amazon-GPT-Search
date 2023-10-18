@@ -69,7 +69,22 @@ const ProductListing = () => {
         </div>
       </div>
       <div className="p-4 flex">
-        <div className="w-2/12 border-r-2">Filters</div>
+        <div className="w-2/12 border-r-2">
+          <ul>
+            <li>
+              <input type="checkbox" id="brand"></input>
+              <label for="brand"> Brand</label>
+            </li>
+            <li>
+              <input type="checkbox" id="price"></input>
+              <label for="price"> Price</label>
+            </li>
+            <li>
+              <input type="checkbox" id="capacity"></input>
+              <label for="capacity"> Capacity</label>
+            </li>
+          </ul>
+        </div>
         <div className="products w-8/12 pl-4 pr-2">
           <div>
             {currentProducts.length > 0 ? (
