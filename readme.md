@@ -25,3 +25,8 @@
     pip install uvicorn fastapi
     uvicorn main:app --reload
 ```
+
+## ToDo-
+
+- Add GPT
+- Filters
