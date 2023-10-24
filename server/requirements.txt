@@ -3,6 +3,7 @@ fastapi
 pymongo
 dotenv
 google-api-python-client
+openai
 
 
 Input: string
