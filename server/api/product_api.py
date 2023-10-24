@@ -5,12 +5,20 @@ from utils.gptsearch import gpt_response
 
 def search_product(client, query: str):
     try:
-        gpt_res = gpt_response(query)
+        # gpt_res = gpt_response(query)
+        # print(gpt_res)
+        # name = gpt_res["name"]
+        # ratings = gpt_res["ratings"]
+        # discount_price = gpt_res["discount_price"]
         productDatabase = client["ProductDatabase"]
         airConditionersCollections = productDatabase["AirConditioners"]
+
         regex_pattern = re.compile(query, re.IGNORECASE)
         cursor = airConditionersCollections.find(
-            {"name": {"$regex": regex_pattern}}
+            {
+                "name": {"$regex": regex_pattern},
+
+            }
         )
 
         product_data = [dict(product, _id=str(product["_id"]))
