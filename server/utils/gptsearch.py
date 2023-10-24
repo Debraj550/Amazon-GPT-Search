@@ -39,12 +39,6 @@ def gpt_response(query: str):
         temperature=0.2
     )
 
-    # # Extract the generated search query from the response
-    # #search_query = response.choices[0].text.strip()
-    # search_query = response.choices[0]
-    # # Print the generated search query for demonstration
-    # print("Generated Search Query:", search_query)
-    # return search_query
 
     # Extract the generated search query from the response
     output_string = response.choices[0].text.strip()
@@ -63,12 +57,8 @@ def gpt_response(query: str):
     short_description = None
     recommendation = None
 
-    # Initialize a list to store the extracted values
     output_list = []
 
-    # Iterate through the lines and extract each field
-    # Iterate through the lines and extract each field
-    # Iterate through the lines and extract each field
     for line in output_lines:
         key, value = map(str.strip, line.split(':', 1))
         if key == 'Name':
@@ -91,29 +81,14 @@ def gpt_response(query: str):
         elif key == 'Recommendation':
             recommendation = value
 
-    # print("HI")
-    # Append the extracted fields to the list
-    output_list.append(name)
-    output_list.append(no_of_ratings)
-    output_list.append(discount_price)
-    output_list.append(intent)
-    output_list.append(short_description)
-    output_list.append(recommendation)
-    # print(output_list)
-    # Return the list
+   
     res = {
         "name": name,
         "ratings": no_of_ratings,
-        "discount_price": discount_price
+        "discount_price": discount_price,
+        "recommendation": recommendation,
+        "short_description": short_description
+
     }
     print(res)
     return res
-
-    # Print the extracted fields
-    gpt_response = []
-    print("Name:", name)
-    print("No_of_Ratings:", no_of_ratings)
-    print("Discount_price:", discount_price)
-    print("Intent:", intent)
-    print("Short_description:", short_description)
-    print("Recommendation:", recommendation)
